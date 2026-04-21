@@ -41,7 +41,7 @@
       <p>Title: <input type="text" required v-model="title" /></p>
       <p>Description: <input type="text" required v-model="description" /></p>
       <p>Html: <input type="text" required v-model="html" /></p>
-      <p>Published: <input type="checkbox" required v-model="published" /></p>
+      <p>Published: <input type="checkbox" v-model="published" /></p>
       <button type="submit">Create Post!</button>
     </form>
   </main>

@@ -1,25 +1,26 @@
 import axios, { type AxiosInstance } from 'axios'
 
+import router from '../router/index'
+
 const apiClient: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8005',
   headers: {
     'Content-type': 'application/json',
   },
-
+  withCredentials: true, // PASSAR O COOKIE QUE VEIO DO BACK EM TODAS AS REQUISIÇÕES.
 })
 
-// Add a request interceptor
-apiClient.interceptors.request.use(function (config) {
-    // Do something before request is sent
-
-    config.headers.Authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJwZXJtaXNzaW9ucyI6WyJDQU5fU0VFX1BPU1RTIiwiQ0FOX0RJU0FCTEVfVVNFUiIsIkNBTl9DUkVBVEVfUE9TVCJdLCJyb2xlcyI6WyJBRE1JTiJdLCJzdWIiOiJwaWV0cm9AZ21haWwuY29tIiwiaWF0IjoxNzc2Nzc2MjYwLCJleHAiOjE3NzY4NjI2NjB9.vrWVk9ItdyDcoulYHfmagvrq82BXHf5e3jSbb8pJk0U"
-
-    return config;
-  }, function (error) {
-    // Do something with request error
+apiClient.interceptors.response.use(function onFulfilled(response) {
+    // STATUS 2XX
+    return response;
+  }, function onRejected(error) {
+    // QUALQUER OUTRO STATUS
+    if(error.status == 401 || error.status == 403){
+      console.log("resposta foi 401 ou 403.")
+      router.push("login")
+    }
     return Promise.reject(error);
-  },
-  { synchronous: true, runWhen: () => true}
-);
+  });
+
 
 export default apiClient

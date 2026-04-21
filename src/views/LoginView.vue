@@ -3,7 +3,7 @@
   import http from '../axios/http'
   import { ref } from 'vue';
 
-  const login = ref('');
+  const email = ref('');
   const password = ref('');
 
   const loading = ref(false);
@@ -14,14 +14,16 @@
     error.value = null;
 
     http.post('/auth/login', {
-      login: login.value,
+      email: email.value,
       password: password.value
     })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .then(function (response) {
-      console.log(response);
+
     })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .catch(function (error) {
-      console.log(error);
+
     })
     .finally(function () {
       loading.value = false;
@@ -34,9 +36,9 @@
   <main>
     <h2>Login!</h2>
     <form @submit.prevent="doLogin">
-      <p>Login: <input type="text" required v-model="login" /></p>
+      <p>E-mail: <input type="text" required v-model="email" /></p>
       <p>Password: <input type="password" required v-model="password" /></p>
-      <button type="submit">Create Post!</button>
+      <button type="submit">Login</button>
     </form>
   </main>
 </template>
