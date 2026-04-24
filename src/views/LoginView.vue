@@ -2,6 +2,10 @@
 
   import http from '../axios/http'
   import { ref } from 'vue';
+  import useUserStore  from "../stores/userStore";
+  import type { User } from '@/interfaces/User';
+
+  const { setUser } = useUserStore();
 
   const email = ref('');
   const password = ref('');
@@ -13,19 +17,20 @@
     loading.value = true;
     error.value = null;
 
-    http.post('/auth/login', {
+    http.post<User>('/auth/login', {
       email: email.value,
       password: password.value
     })
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .then(function (response) {
-
+      setUser(response.data);
     })
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .catch(function (error) {
 
     })
     .finally(function () {
+
       loading.value = false;
     });
   }

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import type { VueCookies } from 'vue-cookies'
-import { inject } from 'vue';
-const $cookies = inject<VueCookies>('$cookies');
 </script>
 
 <template>
@@ -16,7 +13,6 @@ const $cookies = inject<VueCookies>('$cookies');
           <RouterLink to="/create-post">Create Post</RouterLink>
         </div>
       </nav>
-      {{ $cookies }}
     </div>
   </header>
   <RouterView />
