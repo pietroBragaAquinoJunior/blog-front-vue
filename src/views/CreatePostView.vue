@@ -36,14 +36,16 @@
 
 <template>
   <main>
-    <h2>Create Post!</h2>
-    <form @submit.prevent="createPost">
-      <p>Title: <input type="text" required v-model="title" /></p>
-      <p>Description: <input type="text" required v-model="description" /></p>
-      <p>Html: <input type="text" required v-model="html" /></p>
-      <p>Published: <input type="checkbox" v-model="published" /></p>
-      <button type="submit">Create Post!</button>
-    </form>
+    <div class="container-for-form">
+        <form class="form" @submit.prevent="createPost">
+          <p class="form-title">Create New Post</p>
+          <p>Title: <input type="text" required v-model="title" /></p>
+          <p>Description: <input type="text" required v-model="description" /></p>
+          <p>Html: <input type="text" required v-model="html" /></p>
+          <p>Published: <input type="checkbox" v-model="published" /></p>
+          <button type="submit">Submit</button>
+        </form>
+    </div>
   </main>
 </template>
 

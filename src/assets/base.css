@@ -3,3 +3,39 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.container-for-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.form{
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 25px;
+  width: 700px;
+}
+
+.form-title{
+  font-size: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.form input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form input[type=checkbox]{
+  margin-left: 10px;
+  width: fit-content;
+}
+
+.form button {
+  padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;
+}

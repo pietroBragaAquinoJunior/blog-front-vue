@@ -16,21 +16,16 @@ const useUserStore = defineStore('user', () => {
         permissions: [{ id: 9999999999, name: '' }],
       },
     ],
+    authorities: [
+      {authority: ''}
+    ]
   })
 
   function setUser(user: User) {
     storeUser.value = user;
   }
 
-  function getUser() {
-    return storeUser.value;
-  }
-
-  function getFullName() {
-    return storeUser.value?.fullName;
-  }
-
-  return { setUser, getUser, getFullName, storeUser }
+  return { setUser, storeUser }
 }, {
   //  usando plugin para persistir o usuario no front. de qualquer forma,
   //  se o token ou cookie expirar a requisição vai falhar e ele vai pro login.

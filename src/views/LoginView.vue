@@ -4,6 +4,7 @@
   import { ref } from 'vue';
   import useUserStore  from "../stores/userStore";
   import type { User } from '@/interfaces/User';
+  import router from '@/router';
 
   const { setUser } = useUserStore();
 
@@ -21,7 +22,6 @@
       email: email.value,
       password: password.value
     })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .then(function (response) {
       setUser(response.data);
     })
@@ -30,8 +30,9 @@
 
     })
     .finally(function () {
-
       loading.value = false;
+      // Reload the page so the menu bar can work accordingly.
+      router.go(0);
     });
   }
 
@@ -39,12 +40,14 @@
 
 <template>
   <main>
-    <h2>Login!</h2>
-    <form @submit.prevent="doLogin">
-      <p>E-mail: <input type="text" required v-model="email" /></p>
-      <p>Password: <input type="password" required v-model="password" /></p>
-      <button type="submit">Login</button>
-    </form>
+    <div class="container-for-form">
+        <form class="form" @submit.prevent="doLogin">
+          <p class="form-title">Login</p>
+          <p>E-mail: <input type="text" required v-model="email" /></p>
+          <p>Password: <input type="password" required v-model="password" /></p>
+          <button type="submit">Submit</button>
+        </form>
+    </div>
   </main>
 </template>
 

@@ -3,6 +3,7 @@ export interface User {
   fullName: string;
   email: string;
   roles: Role[];
+  authorities: Authority[];
 }
 
 interface Role {
@@ -15,3 +16,8 @@ interface Permission {
   id: number;
   name: string;
 }
+
+export interface Authority {
+  authority: string;
+}
+
