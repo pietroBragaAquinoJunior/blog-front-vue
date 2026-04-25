@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import useUserStore from './stores/userStore';
+import { storeToRefs } from 'pinia'
 
-const { storeUser } = useUserStore();
-
+const store = useUserStore();
+const { storeUser } = storeToRefs(store)
 </script>
 
 <template>
@@ -13,13 +14,13 @@ const { storeUser } = useUserStore();
         <div class="menu">
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/signup">Sign Up</RouterLink>
           <RouterLink to="/login">Login</RouterLink>
-          <RouterLink v-if="storeUser.authorities.find(item => item.authority == 'CAN_CREATE_POST')" to="/create-post">Create New Post</RouterLink>
+          <RouterLink v-if="!!storeUser.authorities.find(item => item.authority == 'CAN_CREATE_POST')" to="/create-post">Create New Post</RouterLink>
         </div>
       </nav>
     </div>
   </header>
-  <!-- Recebo a informação de que devo atualizar da tela de login -->
   <RouterView />
 </template>
 

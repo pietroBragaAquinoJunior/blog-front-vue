@@ -26,13 +26,16 @@ const useUserStore = defineStore('user', () => {
   }
 
   return { setUser, storeUser }
-}, {
+}
+, {
   //  usando plugin para persistir o usuario no front. de qualquer forma,
   //  se o token ou cookie expirar a requisição vai falhar e ele vai pro login.
+  // Não dá pra usar session storage. nao vem o objeto inicial ( id : 99999999...)
+  // Quando não há usuario settado, e ai quebra o app.vue
   persist: {
-    storage: sessionStorage,
     pick: ['storeUser'],
   },
-})
+}
+)
 
 export default useUserStore;

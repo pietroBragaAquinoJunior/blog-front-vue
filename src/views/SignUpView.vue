@@ -1,41 +1,40 @@
 <script setup lang="ts">
 
-  import http from '../axios/http'
-  import { ref } from 'vue';
-  import useUserStore  from "../stores/userStore";
-  import type { User } from '@/interfaces/User';
   import type { ApiError } from '@/interfaces/ApiError';
-import { storeToRefs } from 'pinia';
-  const store = useUserStore();
-
-  const {storeUser} = storeToRefs(store)
+import http from '../axios/http'
+  import { ref } from 'vue';
+import type { AxiosError } from 'axios';
 
   const email = ref('');
+  const fullName = ref('');
   const password = ref('');
 
   const error = ref(null);
 
   const resetForm = () => {
     email.value = ''
+    fullName.value = ''
     password.value = ''
   }
 
   const doLogin = () => {
 
-    error.value = null;
+    error.value = null
 
-    http.post<User>('/auth/login', {
+    http.post('/auth/signup', {
       email: email.value,
+      fullName: fullName.value,
       password: password.value
     })
-    .then(function (response) {
-      store.setUser(response.data);
+    .then(function () {
       resetForm()
-      alert('Bem-Vindo, ' + storeUser.value.fullName + "!")
+      alert('Usuário criado com sucesso!')
     })
-    .catch(function (error) {
+    .catch(function (error: AxiosError) {
+      if(error.response?.data){
         const erroTratado: ApiError = error.response.data as ApiError
         alert( erroTratado.message )
+      }
     })
     // .finally(function () {
 
@@ -48,8 +47,9 @@ import { storeToRefs } from 'pinia';
   <main>
     <div class="container-for-form">
         <form class="form" @submit.prevent="doLogin">
-          <p class="form-title">Login</p>
+          <p class="form-title">Sign Up</p>
           <p>E-mail: <input type="text" required v-model="email" /></p>
+          <p>Full Name: <input type="text" required v-model="fullName" /></p>
           <p>Password: <input type="password" required v-model="password" /></p>
           <button type="submit">Submit</button>
         </form>
