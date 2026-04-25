@@ -9,18 +9,13 @@ import type { AxiosError } from 'axios';
   const fullName = ref('');
   const password = ref('');
 
-  const error = ref(null);
-
   const resetForm = () => {
     email.value = ''
     fullName.value = ''
     password.value = ''
   }
 
-  const doLogin = () => {
-
-    error.value = null
-
+  const doSignUp = () => {
     http.post('/auth/signup', {
       email: email.value,
       fullName: fullName.value,
@@ -46,12 +41,13 @@ import type { AxiosError } from 'axios';
 <template>
   <main>
     <div class="container-for-form">
-        <form class="form" @submit.prevent="doLogin">
+        <form class="form" @submit.prevent="doSignUp">
           <p class="form-title">Sign Up</p>
           <p>E-mail: <input type="text" required v-model="email" /></p>
           <p>Full Name: <input type="text" required v-model="fullName" /></p>
           <p>Password: <input type="password" required v-model="password" /></p>
           <button type="submit">Submit</button>
+          <RouterLink style="padding-left: 20px;" to="/login">Already have an account?</RouterLink>
         </form>
     </div>
   </main>

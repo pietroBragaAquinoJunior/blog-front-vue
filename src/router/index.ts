@@ -25,6 +25,16 @@ const router = createRouter({
       component: () => import('../views/SignUpView.vue')
     },
     {
+      path: '/reset-password-first',
+      name: 'reset-password-first',
+      component: () => import('../views/ResetPasswordFirstView.vue')
+    },
+    {
+      path: '/reset-password-second',
+      name: 'reset-password-second',
+      component: () => import('../views/ResetPasswordSecondView.vue')
+    },
+    {
       path:'/create-post',
       name:'create-post',
       component: () => import('../views/CreatePostView.vue')

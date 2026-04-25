@@ -5,7 +5,8 @@
   import useUserStore  from "../stores/userStore";
   import type { User } from '@/interfaces/User';
   import type { ApiError } from '@/interfaces/ApiError';
-import { storeToRefs } from 'pinia';
+  import { storeToRefs } from 'pinia';
+
   const store = useUserStore();
 
   const {storeUser} = storeToRefs(store)
@@ -13,16 +14,12 @@ import { storeToRefs } from 'pinia';
   const email = ref('');
   const password = ref('');
 
-  const error = ref(null);
-
   const resetForm = () => {
     email.value = ''
     password.value = ''
   }
 
   const doLogin = () => {
-
-    error.value = null;
 
     http.post<User>('/auth/login', {
       email: email.value,
@@ -52,6 +49,8 @@ import { storeToRefs } from 'pinia';
           <p>E-mail: <input type="text" required v-model="email" /></p>
           <p>Password: <input type="password" required v-model="password" /></p>
           <button type="submit">Submit</button>
+          <RouterLink style="padding-left: 20px;" to="/reset-password-first">Need help with your password?</RouterLink>
+          <RouterLink style="padding-left: 20px;" to="/signup">Don't have an account?</RouterLink>
         </form>
     </div>
   </main>
