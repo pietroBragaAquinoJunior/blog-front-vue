@@ -1,6 +1,8 @@
 <script setup lang="ts">
-  import http from '../axios/http'
+  import type { AxiosError } from 'axios';
+import http from '../axios/http'
   import { ref } from 'vue';
+import type { ApiError } from '@/interfaces/ApiError';
 
   const title = ref('');
   const description = ref('');
@@ -9,6 +11,13 @@
 
   const loading = ref(false);
   const error = ref(null);
+
+  const resetForm = () => {
+    title.value = ''
+    description.value = ''
+    html.value = ''
+    published.value = false
+  }
 
   const createPost = () => {
     loading.value = true;
@@ -20,11 +29,15 @@
       html: html.value,
       published: published.value
     })
-    .then(function (response) {
-      console.log(response);
+    .then(function () {
+      resetForm()
+      alert('Postagem criada com sucesso!')
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(function (error: AxiosError) {
+      if(error.response?.data){
+        const erroTratado: ApiError = error.response.data as ApiError
+        alert( erroTratado.message )
+      }
     })
     .finally(function () {
       loading.value = false;
