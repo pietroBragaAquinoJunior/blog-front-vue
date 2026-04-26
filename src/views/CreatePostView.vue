@@ -11,6 +11,7 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { Dropcursor } from '@tiptap/extensions'
 import { Editor, EditorContent } from '@tiptap/vue-3'
+import type { Category } from '@/interfaces/Category'
 
 const title = ref('')
 const description = ref('')
@@ -18,7 +19,8 @@ const published = ref(false)
 // const quill = ref(null);
 
 const loading = ref(false)
-const error = ref(null)
+
+const categories = ref<Category[]>()
 
 const resetForm = () => {
   title.value = ''
@@ -27,9 +29,22 @@ const resetForm = () => {
   published.value = false
 }
 
+const getCategories = () => {
+  loading.value = true
+  http.get<Category[]>('/categories')
+  .then(function (response){
+    categories.value = response.data;
+  }).catch(function (error){
+    const erroTratado: ApiError = error.response.data as ApiError
+    alert(erroTratado.message)
+  }).finally(function (){
+    loading.value = false;
+  })
+}
+
 const createPost = () => {
   loading.value = true
-  error.value = null
+
 
   http.post('/posts', {
     title: title.value,
@@ -69,6 +84,7 @@ onMounted(() => {
     extensions: [Document, Paragraph, Text, imageConfiguration, Dropcursor],
     content: ``,
   })
+  getCategories()
 })
 
 onBeforeUnmount(() => {
