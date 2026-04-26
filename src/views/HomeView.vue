@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import  useUserStore  from '@/stores/userStore';
-import { storeToRefs } from 'pinia';
+import useUserStore from '@/stores/userStore'
+import { storeToRefs } from 'pinia'
 
-const store = useUserStore();
-const { storeUser } = storeToRefs(store);
-
+const store = useUserStore()
+const { storeUser } = storeToRefs(store)
 </script>
 
 <template>
   <main>
-    <p>HOME!</p>
+    <p>Início!</p>
     <p>{{ storeUser }}</p>
   </main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

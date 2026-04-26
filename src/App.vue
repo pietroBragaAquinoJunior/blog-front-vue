@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import useUserStore from './stores/userStore';
+import useUserStore from './stores/userStore'
 import { storeToRefs } from 'pinia'
 
-const store = useUserStore();
+const store = useUserStore()
 const { storeUser } = storeToRefs(store)
 </script>
 
@@ -12,11 +12,13 @@ const { storeUser } = storeToRefs(store)
     <div>
       <nav>
         <div class="menu">
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/signup">Sign Up</RouterLink>
-          <RouterLink to="/login">Login</RouterLink>
-          <RouterLink v-if="!!storeUser.authorities.find(item => item.authority == 'CAN_CREATE_POST')" to="/create-post">Create New Post</RouterLink>
+          <RouterLink to="/">Início</RouterLink>
+          <RouterLink to="/explorar">Explorar</RouterLink>
+          <RouterLink to="/signup">Registrar</RouterLink>
+          <RouterLink to="/login">Entrar</RouterLink>
+          <RouterLink
+            v-if="!!storeUser.authorities.find((item) => item.authority == 'CAN_CREATE_POST')"
+            to="/create-post">Criar Postagem</RouterLink>
         </div>
       </nav>
     </div>
@@ -25,16 +27,15 @@ const { storeUser } = storeToRefs(store)
 </template>
 
 <style scoped>
-.menu{
+.menu {
   height: 75px;
   background-color: black;
   color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
-.menu a{
+.menu a {
   color: white;
   text-decoration: none;
   font-weight: bold;

@@ -10,35 +10,35 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/explore',
+      name: 'explore',
+      component: () => import('../views/ExploreView.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/LoginView.vue'),
     },
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('../views/SignUpView.vue')
+      component: () => import('../views/SignUpView.vue'),
     },
     {
       path: '/reset-password-first',
       name: 'reset-password-first',
-      component: () => import('../views/ResetPasswordFirstView.vue')
+      component: () => import('../views/ResetPasswordFirstView.vue'),
     },
     {
       path: '/reset-password-second',
       name: 'reset-password-second',
-      component: () => import('../views/ResetPasswordSecondView.vue')
+      component: () => import('../views/ResetPasswordSecondView.vue'),
     },
     {
-      path:'/create-post',
-      name:'create-post',
-      component: () => import('../views/CreatePostView.vue')
-    }
+      path: '/create-post',
+      name: 'create-post',
+      component: () => import('../views/CreatePostView.vue'),
+    },
   ],
 })
 

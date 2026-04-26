@@ -12,5 +12,3 @@ app.use(createPinia().use(piniaPluginPersistedstate))
 app.use(router)
 app.provide(AxiosKey, http)
 app.mount('#app')
-
-

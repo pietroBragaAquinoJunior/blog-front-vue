@@ -10,17 +10,19 @@ const apiClient: AxiosInstance = axios.create({
   withCredentials: true, // PASSAR O COOKIE QUE VEIO DO BACK EM TODAS AS REQUISIÇÕES.
 })
 
-apiClient.interceptors.response.use(function onFulfilled(response) {
+apiClient.interceptors.response.use(
+  function onFulfilled(response) {
     // STATUS 2XX
-    return response;
-  }, function onRejected(error) {
+    return response
+  },
+  function onRejected(error) {
     // QUALQUER OUTRO STATUS
-    if(error.status == 401 || error.status == 403){
-      console.log("resposta foi 401 ou 403.")
-      router.push("login")
+    if (error.status == 401 || error.status == 403) {
+      console.log('resposta foi 401 ou 403.')
+      router.push('login')
     }
-    return Promise.reject(error);
-  });
-
+    return Promise.reject(error)
+  },
+)
 
 export default apiClient

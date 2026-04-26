@@ -1,66 +1,66 @@
 <script setup lang="ts">
-  import type { AxiosError } from 'axios';
+import type { AxiosError } from 'axios'
 import http from '../axios/http'
-  import { ref } from 'vue';
-import type { ApiError } from '@/interfaces/ApiError';
+import { ref } from 'vue'
+import type { ApiError } from '@/interfaces/ApiError'
+import type { SuccessResponse } from '@/interfaces/SuccessResponse'
 
-  const title = ref('');
-  const description = ref('');
-  const html = ref('');
-  const published = ref(false);
+const title = ref('')
+const description = ref('')
+const html = ref('')
+const published = ref(false)
 
-  const loading = ref(false);
-  const error = ref(null);
+const loading = ref(false)
+const error = ref(null)
 
-  const resetForm = () => {
-    title.value = ''
-    description.value = ''
-    html.value = ''
-    published.value = false
-  }
+const resetForm = () => {
+  title.value = ''
+  description.value = ''
+  html.value = ''
+  published.value = false
+}
 
-  const createPost = () => {
-    loading.value = true;
-    error.value = null;
+const createPost = () => {
+  loading.value = true
+  error.value = null
 
-    http.post('/posts', {
+  http.post('/posts', {
       title: title.value,
       description: description.value,
       html: html.value,
-      published: published.value
+      published: published.value,
     })
-    .then(function () {
+    .then(function (response) {
       resetForm()
-      alert('Postagem criada com sucesso!')
+      const responseTyped: SuccessResponse = response.data as SuccessResponse
+      alert(responseTyped.message)
     })
     .catch(function (error: AxiosError) {
-      if(error.response?.data){
+      if (error.response?.data) {
         const erroTratado: ApiError = error.response.data as ApiError
-        alert( erroTratado.message )
+        alert(erroTratado.message)
       }
     })
     .finally(function () {
-      loading.value = false;
-    });
-  }
-
-
+      loading.value = false
+    })
+}
 </script>
 
 <template>
   <main>
     <div class="container-for-form">
-        <form class="form" @submit.prevent="createPost">
-          <p class="form-title">Create New Post</p>
-          <p>Title: <input type="text" required v-model="title" /></p>
-          <p>Description: <input type="text" required v-model="description" /></p>
-          <p>Html: <input type="text" required v-model="html" /></p>
-          <p>Published: <input type="checkbox" v-model="published" /></p>
-          <button type="submit">Submit</button>
-        </form>
+      <form v-if="!loading" class="form" @submit.prevent="createPost">
+        <p class="form-title">Criar Postagem</p>
+        <p>Título: <input type="text" required v-model="title" /></p>
+        <p>Descrição: <input type="text" required v-model="description" /></p>
+        <p>Html: <input type="text" required v-model="html" /></p>
+        <p>Publicar: <input type="checkbox" v-model="published" /></p>
+        <button type="submit">Enviar</button>
+      </form>
+      <p v-else>Carregando...</p>
     </div>
   </main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
