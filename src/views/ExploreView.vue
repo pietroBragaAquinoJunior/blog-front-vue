@@ -2,8 +2,10 @@
 
 <template>
   <main>
-    <p>Explorar</p>
+    <p>Explorar!</p>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

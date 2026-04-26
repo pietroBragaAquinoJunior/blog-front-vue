@@ -13,7 +13,7 @@ const { storeUser } = storeToRefs(store)
       <nav>
         <div class="menu">
           <RouterLink to="/">Início</RouterLink>
-          <RouterLink to="/explorar">Explorar</RouterLink>
+          <RouterLink to="/explore">Explorar</RouterLink>
           <RouterLink to="/signup">Registrar</RouterLink>
           <RouterLink to="/login">Entrar</RouterLink>
           <RouterLink
